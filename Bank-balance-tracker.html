@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<head>
+<title>Bank Balance Tracker</title>
+</head>
+<style>
+  h3{
+    text-align: center;
+	padding-top: 20px;
+	border-bottom: 3px solid transparent;
+	border-image: linear-gradient(to right, darkblue, dodgerblue, darkslateblue);
+	border-image-slice: 1;
+	width: 400px;
+	margin: 0 auto;
+	color: darkslateblue;
+  }
+  .container{
+    text-align: center;
+	border-bottom: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	border-left: 1px solid lightgray;
+	border-top: 15px solid transparent;
+	border-image: linear-gradient(to right, darkblue, dodgerblue, darkslateblue);
+	border-image-slice: 1;
+	margin-top: 80px;
+	width: 600px;
+	margin: 0 auto;
+	padding: 30px;
+	border-radius: 10px;
+	margin-top: 50px;
+	background: whitesmoke;
+  }
+  @media(max-width: 799px) {
+    .container{
+	   width: 390px;
+	   margin-top: 30px;
+	}
+	h3{
+	   width: 200px;
+	}
+	
+  }
+#addAccount, #checkAccount, #credit, #debit{
+   background: darkslateblue;
+   border: 1px solid darkslateblue;
+   color: white;
+   width: 140px;
+   height: 30px;
+   border-radius: 15px;
+   cursor: pointer;
+}
+#addAccount:hover{
+   background: darkblue;
+   border: 1px solid darkblue;
+}
+#checkAccount:hover{
+   background: darkblue;
+   border: 1px solid darkblue;
+}
+#credit:hover{
+   background: darkblue;
+   border: 1px solid darkblue;
+}
+#debit:hover{
+   background: darkblue;
+   border: 1px solid darkblue;
+}
+ h4{
+   font-family: arial;
+   font-weight: lighter;
+ }
+ .accountArea{
+   border: 1px solid lightgray;
+   padding: 20px;
+   width: 400px;
+   margin: 0 auto;
+ }
+ @media(max-width: 799px) {
+    .accountArea{
+	   width: 300px;
+	}
+ }
+ .l{
+   font-family: arial;
+   color: darkslateblue;
+ }
+ .in{
+   margin-top: 7px;
+   margin-bottom: 5px;
+   width: 200px;
+   height: 30px;
+   border: 2px solid darkslateblue;
+   border-radius: 5px;
+   text-align: center;
+   font-size: 18px;
+ }
+ #save, #saveCredit, #saveDebit{
+   background: forestgreen;
+   border: 1px solid forestgreen;
+   color: white;
+   width: 100px;
+   height: 30px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ #save:hover{
+    background: green;
+	border: 1px solid green;
+	//margin-bottom: -5px;
+ }
+ #saveCredit:hover{
+    background: green;
+	border: 1px solid green;
+	//margin-bottom: -5px;
+ }
+ #saveDebit:hover{
+    background: green;
+	border: 1px solid green;
+	//margin-bottom: -5px;
+ }
+ #ac{
+   font-weight: bold;
+ }
+ #p{
+   color: white;
+   padding: 10px;
+   font-size: 16px;
+   border-radius: 5px;
+   font-weight: bold;
+   display: none;
+  
+ }
+ #p2{
+   color: black;
+   padding: 10px;
+   font-size: 16px;
+   border-radius: 5px;
+   font-weight: bold;
+   
+ }
+ #sp{
+   padding: 15px;
+   font-weight: bold;
+ }
+ .getNewAmount{
+    border: 1px solid gray;
+	padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+	border-radius: 5px;
+ }
+ @media(max-width: 799px) {
+   .getNewAmount{
+      width: 300px;
+   }
+ }
+ #p0{
+    background: orangered;
+	color: white;
+	padding: 10px;
+	border: 1px solid orangered;
+	border-radius: 5px;
+	display: none;
+ }
+ .hovertext1{
+      position: relative;
+	 
+	  back
+   }
+   .hovertext1:before{
+      content: attr(data-hover);
+	  visibility: hidden;
+	  opacity: 0;
+	  width: 250px;
+	  background-color: gray;
+	  color: white;
+	  text-align: center;
+	  border-radius: 5px;
+	  padding: 5px 0;
+	  transition: opacity 1s ease-in-out;
+	  position: absolute;
+	  z-index: 1;
+	  left: 70px;
+	  top: 110%;
+   }
+   .hovertext1:hover:before{
+      opacity: 1;
+	  visibility: visible;
+   }
+   #pp{
+     padding: 10px;
+	 border-radius: 5px;
+	 display: none;
+	 margin-top: -10px;
+   }
+   #pc{
+     padding: 10px;
+	 border-radius: 5px;
+	 display: none;
+	 color: white;
+	 margin-top: -10px;
+   }
+   
+</style>
+<body>
+<div class="container">
+  <h3><span style="color: darkblue">Bank</span> <span style="color: dodgerblue;">Balance</span> Tracker</h3>
+  <div id="inputForm">
+      <div id="newAccount">
+      <h4>Account not added yet?</h4>
+      <span class="hovertext1" data-hover="Please add your bank account here">
+	  <button id="addAccount" onclick="addAccount()">Add Bank Account</button>
+	  </span>
+	  </div>
+	   <p id="p0"></p>
+	  <div id="cAccount">
+	  <h4>Account already added?</h4>
+	   <span class="hovertext1" data-hover="Check your balance here">
+	  <button id="checkAccount" onClick="checkAccount()">Check Balance</button>
+	  </span>
+	  </div>
+	 
+	  <p id="p"></p>
+	  <p id="p2"></p>
+  </div>
+</div>
+</body>
+<script>
+      
+   function addAccount() {
+       var x = localStorage.getItem("aNumber");
+	   var y = localStorage.getItem("balance");
+	   var name = localStorage.getItem("name");
+	   if(x == null && y == null){
+       var addAccountArea = '<div class="accountArea">' +
+	                        '<label class="l">Enter your name</label><br>' +
+							'<input type="text" id="name" class="in"><br>' +
+	                        '<label class="l">Enter your bank account number</label><br>' + 
+	                        '<input type="number" id="ban" class="in"><br>' + 
+							'<label class="l">Enter the current balance in your account</label><br>' + 
+							'<input type="number" id="bal" class="in"><br><br>' +
+							 '<p id="pp"></p>'	+
+                            '<button id="save" onclick="save()">Save</button>'	+					
+							'</div>';
+	   document.getElementById("p").innerHTML =  addAccountArea;
+       //document.getElementById("addAccount").style.display = "none"	;   
+	   document.getElementById("cAccount").style.display = "none";
+	   document.getElementById("p").style.display = "block";
+	   document.getElementById("p2").style.display = "none";
+	  }
+	  else{
+	    var war = "Dear " + name + ", you have already added your bank account!";
+	    document.getElementById("p0").innerHTML = war;
+		document.getElementById("p0").style.display = "block";
+		document.getElementById("p2").style.display = "none";
+	  }
+   }
+   
+   function save() {
+       var accNum = document.getElementById("ban").value;
+	   var balance = document.getElementById("bal").value;
+	   var name = document.getElementById("name").value;
+	   if(accNum != "" && balance != "" && name != ''){
+	   localStorage.setItem("aNumber", accNum);
+	   localStorage.setItem("balance", balance);
+	   localStorage.setItem("name", name);
+	 
+	   var store = '<div class="store"><p id="pStore">Dear ' + name + ', your bank account has been added successfully. Now, you can check your balance!</p></div>'
+	   document.getElementById("p").style.background = "forestgreen";
+	   document.getElementById("p").innerHTML = store;
+	   document.getElementById("cAccount").style.display = "block";
+	   }
+	   else{
+	     document.getElementById("pp").innerHTML = "Dear User, Please fill the input fields first!";
+		 document.getElementById("pp").style.background = "red";
+		 document.getElementById("pp").style.display = "block";
+	   }
+   }
+   
+   function checkAccount() {
+       var getAccount = localStorage.getItem("aNumber");
+	   var getBalance = localStorage.getItem("balance");
+	   var name = localStorage.getItem("name");
+	   //var showAccount = `<div class='sAccount'><p id="sp">Hello I have ${getBalance}`;
+	   if(getAccount != null && getBalance != null){
+       var showAccount = '<div class="sAccount"><p id="sp">Dear ' + name + ', the current balance in your bank account ' + 
+                        getAccount + ' is Rs.' +  getBalance + '</p>' +
+						' <span class="hovertext1" data-hover="Please credit your account here">' +
+						 '<button id="credit" onclick="credit()">Credit Account</button>  ' +
+						 '</span>' +
+						 ' <span class="hovertext1" data-hover="Please debit your account here">' +
+						 '<button id="debit" onclick="debit()">Debit Account</button>' +
+						 '</span>' +
+                         '<p id="p3"></p>' +						 
+						 '</div>';
+       document.getElementById("p2").innerHTML = showAccount;
+	   document.getElementById("p").innerHTML = "";
+	   document.getElementById("p2").style.background = "green";
+	   document.getElementById("sp").style.background = "wheat";
+	   document.getElementById("sp").style.color = "black";
+	   document.getElementById("p").style.display = "none";
+	   document.getElementById("p2").style.background = "white";
+	   document.getElementById("p2").style.display = "block";
+	   document.getElementById("p0").style.display = "none";
+	  }
+	  else{
+	    document.getElementById("p2").innerHTML = `Dear User, Please add your bank account first.`;
+		document.getElementById("p2").style.background = "red";
+		document.getElementById("p2").style.color = "white";
+	  }
+   }
+  
+   function credit() {
+       var getNewAmount = '<div class="getNewAmount"><label class="l">Enter the amount you want to credit to your bank account</label><br>' +
+	                      '<input type="number" id="newCamount" class="in"><br><br>' +
+						  '<p id="pc"></p>' +
+						  '<button id="saveCredit" onclick="saveCredit()">Save</button>' +
+						  '</div>';
+		document.getElementById("p3").innerHTML = getNewAmount;
+		document.getElementById("sp").style.display = "none";
+	   //
+       //
+	   //var balance = getAmount + creditAmount;
+	  // 
+   }
+   
+   function saveCredit() {
+       var creditAmount = +document.getElementById("newCamount").value;
+	   //alert(typeof(creditAmount));
+	   if(creditAmount != "" && Math.sign(creditAmount) === 1){
+	   var getAmount = localStorage.getItem("balance");
+	   var name = localStorage.getItem("name");
+	   var balance = parseInt(getAmount) + parseInt(creditAmount);
+	   localStorage.setItem("balance", balance);
+	   document.getElementById("p2").innerHTML = `Dear ${name}, Rs. ${creditAmount} has been successfully credited to your bank account.`;
+	   document.getElementById("p2").style.background = "green";
+	   document.getElementById("p2").style.color = "white";
+	  }
+	  else if(creditAmount != "" && Math.sign(creditAmount) === -1){
+	    var name = localStorage.getItem("name");
+	    document.getElementById("pc").innerHTML = `Dear ${name}, You can not credit negative amount!`;
+		document.getElementById("pc").style.background = "red";
+		document.getElementById("pc").style.display = "block";
+	  }
+	  else if(creditAmount != "" && Math.sign(creditAmount) === 0){
+	    var name = localStorage.getItem("name");
+	    document.getElementById("pc").innerHTML = `Dear ${name}, 0 can not credited!`;
+		document.getElementById("pc").style.background = "red";
+		document.getElementById("pc").style.display = "block";
+	  }
+	  else if(creditAmount == ""){
+	     var name = localStorage.getItem("name");
+		 document.getElementById("pc").innerHTML = `Dear ${name}, Please enter the credit amount`;
+		 document.getElementById("pc").style.background = "red";
+	     document.getElementById("pc").style.display = "block";
+	  }
+   }
+   
+   function debit() {
+        var getNewAmount = '<div class="getNewAmount"><label class="l">Enter the amount you want to debit from your bank account</label><br>' +
+	                      '<input type="number" id="newCamount" class="in"><br><br>' +
+						  '<p id="pc"></p>' +
+						  '<button id="saveDebit" onclick="saveDebit()">Save</button>' +
+						  '</div>';
+		document.getElementById("p3").innerHTML = getNewAmount;
+		document.getElementById("sp").style.display = "none";
+   }
+   
+   function saveDebit() {
+       var debitAmount = +document.getElementById("newCamount").value;
+	   var getAmount = localStorage.getItem("balance");
+	   var name = localStorage.getItem("name");
+	   
+	   if(debitAmount < getAmount && debitAmount != "" && debitAmount > 0){
+	   var balance = getAmount - debitAmount;
+	   localStorage.setItem("balance", balance);
+	   document.getElementById("p2").innerHTML = `Dear ${name}, Rs. ${debitAmount} has been successfully debited from your bank account.`;
+	   document.getElementById("p2").style.background = "green";
+	   document.getElementById("p2").style.color = "white";
+	  
+	   }
+	   else if(debitAmount == ""){
+	     var name = localStorage.getItem("name");
+	     document.getElementById("pc").innerHTML = `Dear ${name}, Please enter the debit amount`;
+		 document.getElementById("pc").style.background = "red";
+		 document.getElementById("pc").style.display = "block";
+	   }
+	   else if(debitAmount < 0){
+	     document.getElementById("pc").innerHTML = `Dear ${name}, you can not debit negative amount!`;
+		 document.getElementById("pc").style.background = "red";
+	     document.getElementById("p2").style.color = "white";
+		 document.getElementById("pc").style.display = "block";
+	   }
+	   else if(debitAmount === getAmount){
+	      var balance = getAmount - debitAmount
+		  localStorage.setItem("balance", balance);
+		  document.getElementById("p2").innerHTML = `Dear ${name}, Rs. ${debitAmount} has been successfully debited from your bank account. Now your balance is 0`;
+		  document.getElementById("p2").style.display = "block";
+		  document.getElementById("p2").style.background = "orangered";
+	   }
+	   else if(debitAmount > getAmount){
+	     document.getElementById("pc").innerHTML = `Dear ${name}, you do not have enough balance to debit from your account!`;
+		 document.getElementById("pc").style.background = "red";
+	     document.getElementById("p2").style.color = "white";
+		 document.getElementById("pc").style.display = "block";
+	   }
+   }
+   
+</script>
+</html>
